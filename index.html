@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Euphoria Theme</title>
+    <meta
+      name="description"
+      content="Euphoria is a customizable theme built for the Pterodactyl panel, powered by the Blueprint Framework."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0b0d12" />
+    <link rel="canonical" href="https://euphoriatheme.uk/" />
+    <link rel="icon" type="image/svg+xml" href="public/images/ptero.svg" />
+    <link rel="apple-touch-icon" href="public/images/ptero.svg" />
+    <meta property="og:title" content="Euphoria Theme" />
+    <meta
+      property="og:description"
+      content="Euphoria is a customizable theme built for the Pterodactyl panel, powered by the Blueprint Framework."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://euphoriatheme.uk/" />
+    <meta property="og:image" content="https://euphoriatheme.uk/public/images/EUPHORIA.jpg" />
+    <meta property="og:image:alt" content="Euphoria Theme cover" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Euphoria Theme" />
+    <meta
+      name="twitter:description"
+      content="Euphoria is a customizable theme built for the Pterodactyl panel, powered by the Blueprint Framework."
+    />
+    <meta name="twitter:image" content="https://euphoriatheme.uk/public/images/EUPHORIA.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/styles.css" />
+  </head>
+  <body>
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="public/images/ptero.svg" alt="Euphoria logo" />
+        <span>Euphoria</span>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#gallery">Showcase</a>
+        <a href="#products">Products</a>
+        <a href="#community">Community</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="cta-group">
+        <a class="ghost" href="https://demo.euphoriatheme.uk" target="_blank" rel="noreferrer">Demo Panel</a>
+        <a class="solid" href="#products">Get the theme</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Euphoria Theme</p>
+          <h1>Revive your panel.</h1>
+          <p class="lede">
+            A theme built for the Pterodactyl panel, using the Blueprint Framework. Euphoria delivers a
+            modern, customizable experience that keeps evolving.
+          </p>
+          <div class="hero-actions">
+            <a class="solid" href="https://demo.euphoriatheme.uk" target="_blank" rel="noreferrer">Try the demo</a>
+            <a class="ghost" href="#products">Where to buy</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <span class="stat">Always evolving</span>
+              <span class="label">New styling & features</span>
+            </div>
+            <div>
+              <span class="stat">Theme + addons</span>
+              <span class="label">Modular extensions</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img
+            src="public/images/dashboard.png"
+            alt="Euphoria theme header preview"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div class="badge">Always evolving</div>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="section-title">
+          <h2>Always evolving.</h2>
+          <p>
+            We have left the beta phase and already shipped updates with fresh styling, customization,
+            and new features for the Pterodactyl panel.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Theme Customizer</h3>
+            <p>Dial in colors, spacing, and layout preferences without touching your core panel.</p>
+          </article>
+          <article>
+            <h3>Live UI Enhancements</h3>
+            <p>Modernize navigation, server cards, and dashboards with a clean, confident look.</p>
+          </article>
+          <article>
+            <h3>Premium Visuals</h3>
+            <p>Designed to feel polished out of the box with layered backgrounds and depth.</p>
+          </article>
+          <article>
+            <h3>Modular Add-ons</h3>
+            <p>Expand with plugins like Player Listing and MC Logs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gallery" class="gallery">
+        <div class="section-title">
+          <h2>See Euphoria in action.</h2>
+          <p>Before, after, and everything in between. The theme adapts to every panel layout.</p>
+        </div>
+        <div class="gallery-grid">
+          <img
+            src="public/images/theme-customiser.png"
+            alt="Theme customizer view"
+            loading="lazy"
+            decoding="async"
+            class="gallery-item"
+          />
+          <img
+            src="public/images/console.png"
+            alt="Console view"
+            loading="lazy"
+            decoding="async"
+            class="gallery-item"
+          />
+          <img
+            src="public/images/login.png"
+            alt="Login view"
+            loading="lazy"
+            decoding="async"
+            class="gallery-item"
+          />
+        </div>
+      </section>
+
+      <div class="image-modal" id="image-modal" aria-hidden="true">
+        <div class="image-modal-backdrop" data-modal-close></div>
+        <div class="image-modal-content" role="dialog" aria-modal="true" aria-label="Image preview">
+          <button class="image-modal-close" type="button" data-modal-close aria-label="Close image">×</button>
+          <img id="image-modal-img" alt="" />
+          <p id="image-modal-caption"></p>
+        </div>
+      </div>
+
+      <section class="video">
+        <div class="section-title">
+          <h2>Watch the walkthrough</h2>
+          <p>See the theme in motion with a full overview of the experience.</p>
+        </div>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/PvEyH9zxlng"
+            title="Euphoria theme walkthrough"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <section id="products" class="products">
+        <div class="section-title">
+          <h2>Our products</h2>
+          <p>Most of our features are also available independently and compatible with most themes.</p>
+        </div>
+        <div class="product-block">
+          <div class="product-block-title">
+            <div>
+              <h3>Blueprint Addons</h3>
+              <span>(<span id="blueprint-addon-count">0</span>)</span>
+            </div>
+            <div class="carousel-controls" aria-label="Blueprint addons carousel controls">
+              <button class="carousel-btn" type="button" data-carousel="addons" data-direction="prev" aria-label="Scroll addons left">‹</button>
+              <button class="carousel-btn" type="button" data-carousel="addons" data-direction="next" aria-label="Scroll addons right">›</button>
+            </div>
+          </div>
+          <div class="carousel-track" data-carousel-track="addons">
+            <div id="blueprint-addons-grid" class="data-grid carousel-grid">
+              <article class="data-card loading">Loading addons...</article>
+            </div>
+          </div>
+        </div>
+        <div class="product-block">
+          <div class="product-block-title">
+            <div>
+              <h3>Blueprint Themes</h3>
+              <span>(<span id="blueprint-theme-count">0</span>)</span>
+            </div>
+            <div class="carousel-controls" aria-label="Blueprint themes carousel controls">
+              <button class="carousel-btn" type="button" data-carousel="themes" data-direction="prev" aria-label="Scroll themes left">‹</button>
+              <button class="carousel-btn" type="button" data-carousel="themes" data-direction="next" aria-label="Scroll themes right">›</button>
+            </div>
+          </div>
+          <div class="carousel-track" data-carousel-track="themes">
+            <div id="blueprint-themes-grid" class="data-grid carousel-grid">
+              <article class="data-card loading">Loading themes...</article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="community" class="community">
+        <div class="section-title">
+          <h2>Our supporters</h2>
+          <p>Thanks to the teams and individuals who keep Euphoria growing.</p>
+        </div>
+        <div class="community-split">
+          <div class="community-block">
+            <h3>Contributors</h3>
+            <div id="contributors-grid" class="data-grid">
+              <article class="data-card loading">Loading contributors...</article>
+            </div>
+          </div>
+          <div class="community-block">
+            <h3>Donators</h3>
+            <div id="donators-grid" class="data-grid">
+              <article class="data-card loading">Loading donators...</article>
+            </div>
+          </div>
+        </div>
+        <div class="card quick-links">
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="https://status.euphoriadevelopment.uk/status/euphoria" target="_blank" rel="noreferrer">Service Status</a></li>
+            <li><a href="https://discord.gg/Cus2zP4pPH" target="_blank" rel="noreferrer">Support</a></li>
+            <li><a href="https://www.sourcexchange.net/products/euphoriatheme" target="_blank" rel="noreferrer">SourceXchange</a></li>
+            <li><a href="https://builtbybit.com/resources/euphoria.52856/" target="_blank" rel="noreferrer">BuiltByBit</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="about-inner">
+          <div>
+            <h2>About Euphoria</h2>
+            <p>
+              Euphoria is a customizable theme built for the Pterodactyl panel, using the Blueprint
+              Framework to enhance the server management experience. Join the Discord community to stay
+              updated on new features and releases.
+            </p>
+          </div>
+          <div class="about-links">
+            <a href="https://discord.gg/Cus2zP4pPH" target="_blank" rel="noreferrer">Join Discord</a>
+            <a href="https://github.com/EuphoriaTheme" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.youtube.com/@RepGraphics" target="_blank" rel="noreferrer">YouTube</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 Euphoria. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://euphoriatheme.uk/" target="_blank" rel="noreferrer">Euphoria Theme</a>
+        <a href="https://discord.gg/Cus2zP4pPH" target="_blank" rel="noreferrer">Discord</a>
+        <a href="https://github.com/EuphoriaTheme" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </footer>
+
+    <script src="public/script.js"></script>
+  </body>
+</html>
