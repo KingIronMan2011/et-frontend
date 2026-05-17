@@ -7,7 +7,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.2 }
+  { threshold: 0.2 },
 );
 
 function observeReveal(elements) {
@@ -62,12 +62,15 @@ function setGridMessage(grid, message) {
 
 function createPersonCard(person, typeLabel) {
   const name = person && person.Name ? String(person.Name) : "Unknown";
-  const contribution = person && person.Contribution ? String(person.Contribution) : "";
+  const contribution =
+    person && person.Contribution ? String(person.Contribution) : "";
   const donation = person && person.Donation ? String(person.Donation) : "";
   const href = safeUrl(person && person.Link);
   const imageUrl = safeUrl(person && person.Image);
   const fallbackAvatar =
-    "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=3b82f6&color=fff&size=96";
+    "https://ui-avatars.com/api/?name=" +
+    encodeURIComponent(name) +
+    "&background=3b82f6&color=fff&size=96";
 
   const el = document.createElement(href ? "a" : "article");
   if (href) {
@@ -125,7 +128,9 @@ async function loadContributors() {
   if (!grid) return;
 
   try {
-    const response = await fetch(API.contributors, { headers: { Accept: "application/json" } });
+    const response = await fetch(API.contributors, {
+      headers: { Accept: "application/json" },
+    });
     const contributors = await response.json();
     const items = Array.isArray(contributors) ? contributors : [];
 
@@ -150,7 +155,9 @@ async function loadDonators() {
   if (!grid) return;
 
   try {
-    const response = await fetch(API.donators, { headers: { Accept: "application/json" } });
+    const response = await fetch(API.donators, {
+      headers: { Accept: "application/json" },
+    });
     const donators = await response.json();
     const items = Array.isArray(donators) ? donators : [];
 
@@ -171,14 +178,17 @@ async function loadDonators() {
 }
 
 function normalizeType(type) {
-  return String(type || "").trim().toLowerCase();
+  return String(type || "")
+    .trim()
+    .toLowerCase();
 }
 
 function getBannerUrl(product) {
   const banner = product && product.banner;
   if (!banner) return null;
   if (typeof banner === "string") return banner;
-  if (typeof banner === "object") return banner.lowres || banner.fullres || null;
+  if (typeof banner === "object")
+    return banner.lowres || banner.fullres || null;
   return null;
 }
 
@@ -229,7 +239,10 @@ function getPriceLabel(product) {
     if (offer && offer.price > 0) {
       if (offer.currency) {
         try {
-          return new Intl.NumberFormat(undefined, { style: "currency", currency: offer.currency }).format(offer.price);
+          return new Intl.NumberFormat(undefined, {
+            style: "currency",
+            currency: offer.currency,
+          }).format(offer.price);
         } catch {
           return offer.price.toFixed(2);
         }
@@ -283,7 +296,8 @@ function extractRepoKeyFromGithubUrl(url) {
 function repoCandidatesForProduct(product) {
   const candidates = [];
   const name = product && product.name ? String(product.name) : "";
-  const identifier = product && product.identifier ? String(product.identifier) : "";
+  const identifier =
+    product && product.identifier ? String(product.identifier) : "";
   const type = normalizeType(product && product.type);
 
   if (name) {
@@ -341,8 +355,12 @@ function attachGithubLinks(products, repos) {
 
     const inferredUrl = (repo && repo.html_url) || null;
     const githubUrl = explicit || inferredUrl || null;
-    const stars = repo && typeof repo.stargazers_count === "number" ? repo.stargazers_count : null;
-    const forks = repo && typeof repo.forks_count === "number" ? repo.forks_count : null;
+    const stars =
+      repo && typeof repo.stargazers_count === "number"
+        ? repo.stargazers_count
+        : null;
+    const forks =
+      repo && typeof repo.forks_count === "number" ? repo.forks_count : null;
 
     return {
       ...(p || {}),
@@ -368,7 +386,10 @@ function loadGithubCache() {
 
 function saveGithubCache(items) {
   try {
-    localStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), items }));
+    localStorage.setItem(
+      GITHUB_CACHE_KEY,
+      JSON.stringify({ ts: Date.now(), items }),
+    );
   } catch {
     // ignore storage failures
   }
@@ -414,11 +435,21 @@ function setCachedRelease(repoPath, data) {
 function pickBestAsset(assets) {
   const list = Array.isArray(assets) ? assets : [];
   const zip = list.find(
-    (a) => a && a.browser_download_url && String(a.name || "").toLowerCase().endsWith(".zip"),
+    (a) =>
+      a &&
+      a.browser_download_url &&
+      String(a.name || "")
+        .toLowerCase()
+        .endsWith(".zip"),
   );
   if (zip) return zip;
   const jar = list.find(
-    (a) => a && a.browser_download_url && String(a.name || "").toLowerCase().endsWith(".jar"),
+    (a) =>
+      a &&
+      a.browser_download_url &&
+      String(a.name || "")
+        .toLowerCase()
+        .endsWith(".jar"),
   );
   if (jar) return jar;
   return list.find((a) => a && a.browser_download_url) || null;
@@ -426,7 +457,9 @@ function pickBestAsset(assets) {
 
 async function fetchLatestReleaseDownload(repoPath) {
   async function fetchJson(url) {
-    const res = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+    const res = await fetch(url, {
+      headers: { Accept: "application/vnd.github+json" },
+    });
     if (!res.ok) return { ok: false, status: res.status, json: null };
     try {
       return { ok: true, status: res.status, json: await res.json() };
@@ -435,24 +468,36 @@ async function fetchLatestReleaseDownload(repoPath) {
     }
   }
 
-  const latest = await fetchJson("https://api.github.com/repos/" + repoPath + "/releases/latest");
+  const latest = await fetchJson(
+    "https://api.github.com/repos/" + repoPath + "/releases/latest",
+  );
   if (latest.ok) {
     const best = pickBestAsset(latest.json && latest.json.assets);
     if (best && best.browser_download_url) {
-      return { kind: "asset", url: best.browser_download_url, assetName: best.name || "" };
+      return {
+        kind: "asset",
+        url: best.browser_download_url,
+        assetName: best.name || "",
+      };
     }
     return { kind: "no_asset" };
   }
 
   if (latest.status === 404) {
-    const list = await fetchJson("https://api.github.com/repos/" + repoPath + "/releases?per_page=10");
+    const list = await fetchJson(
+      "https://api.github.com/repos/" + repoPath + "/releases?per_page=10",
+    );
     if (!list.ok) return { kind: "no_release" };
     const releases = Array.isArray(list.json) ? list.json : [];
     const firstPublished = releases.find((r) => r && !r.draft);
     if (!firstPublished) return { kind: "no_release" };
     const best = pickBestAsset(firstPublished.assets);
     if (best && best.browser_download_url) {
-      return { kind: "asset", url: best.browser_download_url, assetName: best.name || "" };
+      return {
+        kind: "asset",
+        url: best.browser_download_url,
+        assetName: best.name || "",
+      };
     }
     return { kind: "no_asset" };
   }
@@ -510,7 +555,8 @@ function hydrateProductDownloads(root) {
     if (releaseInFlight.has(repoPath)) return;
     const p = fetchLatestReleaseDownload(repoPath)
       .then((state) => {
-        const normalized = state && typeof state === "object" ? state : { kind: "error" };
+        const normalized =
+          state && typeof state === "object" ? state : { kind: "error" };
         setCachedRelease(repoPath, normalized);
         applyDownloadState(button, normalized);
       })
@@ -529,8 +575,12 @@ function hydrateProductDownloads(root) {
 
 async function fetchGithubRepos() {
   const url =
-    "https://api.github.com/orgs/" + encodeURIComponent(GITHUB_ORG) + "/repos?per_page=100&sort=updated";
-  const res = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+    "https://api.github.com/orgs/" +
+    encodeURIComponent(GITHUB_ORG) +
+    "/repos?per_page=100&sort=updated";
+  const res = await fetch(url, {
+    headers: { Accept: "application/vnd.github+json" },
+  });
   if (!res.ok) throw new Error("GitHub request failed (" + res.status + ").");
 
   const repos = await res.json();
@@ -541,8 +591,11 @@ async function fetchGithubRepos() {
     archived: Boolean(repo && repo.archived),
     fork: Boolean(repo && repo.fork),
     stargazers_count:
-      typeof (repo && repo.stargazers_count) === "number" ? repo.stargazers_count : 0,
-    forks_count: typeof (repo && repo.forks_count) === "number" ? repo.forks_count : 0,
+      typeof (repo && repo.stargazers_count) === "number"
+        ? repo.stargazers_count
+        : 0,
+    forks_count:
+      typeof (repo && repo.forks_count) === "number" ? repo.forks_count : 0,
   }));
 }
 
@@ -550,18 +603,34 @@ function createProductCard(product) {
   const type = normalizeType(product && product.type);
   const typeLabel = type === "theme" ? "Theme" : "Addon";
   const name = String((product && product.name) || "Untitled");
-  const summary = String((product && product.summary) || "No summary provided.");
+  const summary = String(
+    (product && product.summary) || "No summary provided.",
+  );
   const bannerUrl = safeUrl(getBannerUrl(product));
   const blueprintUrl = safeUrl(getBlueprintUrl(product));
-  const bbbUrl = safeUrl(product && product.platforms && product.platforms.BUILTBYBIT && product.platforms.BUILTBYBIT.url);
-  const sxUrl = safeUrl(product && product.platforms && product.platforms.SOURCEXCHANGE && product.platforms.SOURCEXCHANGE.url);
+  const bbbUrl = safeUrl(
+    product &&
+      product.platforms &&
+      product.platforms.BUILTBYBIT &&
+      product.platforms.BUILTBYBIT.url,
+  );
+  const sxUrl = safeUrl(
+    product &&
+      product.platforms &&
+      product.platforms.SOURCEXCHANGE &&
+      product.platforms.SOURCEXCHANGE.url,
+  );
   const ghUrl = safeUrl(product && product.githubUrl);
   const repoPath = ghUrl ? getRepoPathFromGithubUrl(ghUrl) : null;
   const versionLabel = getLatestVersionName(product);
   const ghStars =
-    product && typeof product.githubStars === "number" ? product.githubStars.toLocaleString() : null;
+    product && typeof product.githubStars === "number"
+      ? product.githubStars.toLocaleString()
+      : null;
   const ghForks =
-    product && typeof product.githubForks === "number" ? product.githubForks.toLocaleString() : null;
+    product && typeof product.githubForks === "number"
+      ? product.githubForks.toLocaleString()
+      : null;
   const priceLabel = getPriceLabel(product);
   const panels = Number(product && product.stats && product.stats.panels) || 0;
 
@@ -683,7 +752,8 @@ async function loadProducts() {
     ]);
 
     if (reposRes.status === "fulfilled") saveGithubCache(reposRes.value);
-    const reposForLinks = reposRes.status === "fulfilled" ? reposRes.value : cachedRepos;
+    const reposForLinks =
+      reposRes.status === "fulfilled" ? reposRes.value : cachedRepos;
 
     if (productsRes.status !== "fulfilled") {
       throw new Error("Request failed.");
@@ -692,7 +762,9 @@ async function loadProducts() {
     const res = productsRes.value;
     if (!res.ok) throw new Error("Request failed (" + res.status + ").");
     const data = await res.json();
-    const rawItems = Array.isArray(data && data.blueprintExtensions) ? data.blueprintExtensions : [];
+    const rawItems = Array.isArray(data && data.blueprintExtensions)
+      ? data.blueprintExtensions
+      : [];
     const items = attachGithubLinks(rawItems, reposForLinks);
 
     const themes = items.filter((p) => normalizeType(p && p.type) === "theme");
@@ -704,7 +776,9 @@ async function loadProducts() {
     if (addonsGrid) {
       addonsGrid.innerHTML = "";
       if (!addons.length) setGridMessage(addonsGrid, "No addons found yet.");
-      addons.forEach((product) => addonsGrid.appendChild(createProductCard(product)));
+      addons.forEach((product) =>
+        addonsGrid.appendChild(createProductCard(product)),
+      );
       hydrateProductDownloads(addonsGrid);
       observeReveal(Array.from(addonsGrid.children));
     }
@@ -712,23 +786,29 @@ async function loadProducts() {
     if (themesGrid) {
       themesGrid.innerHTML = "";
       if (!themes.length) setGridMessage(themesGrid, "No themes found yet.");
-      themes.forEach((product) => themesGrid.appendChild(createProductCard(product)));
+      themes.forEach((product) =>
+        themesGrid.appendChild(createProductCard(product)),
+      );
       hydrateProductDownloads(themesGrid);
       observeReveal(Array.from(themesGrid.children));
     }
   } catch (error) {
     console.error("Error fetching products:", error);
-    if (addonsGrid) setGridMessage(addonsGrid, "Unable to load addons at this time.");
-    if (themesGrid) setGridMessage(themesGrid, "Unable to load themes at this time.");
+    if (addonsGrid)
+      setGridMessage(addonsGrid, "Unable to load addons at this time.");
+    if (themesGrid)
+      setGridMessage(themesGrid, "Unable to load themes at this time.");
     if (addonCount) addonCount.textContent = "0";
     if (themeCount) themeCount.textContent = "0";
   }
 }
 
-document.querySelectorAll("section, .hero-media img, .feature-grid article").forEach((el) => {
-  el.classList.add("reveal-base");
-  observer.observe(el);
-});
+document
+  .querySelectorAll("section, .hero-media img, .feature-grid article")
+  .forEach((el) => {
+    el.classList.add("reveal-base");
+    observer.observe(el);
+  });
 
 function initCarouselControls() {
   const buttons = Array.from(document.querySelectorAll(".carousel-btn"));
@@ -753,7 +833,10 @@ function initCarouselControls() {
       const amount = cardWidth + gap;
       const maxScroll = getMaxScrollLeft(track);
 
-      if (direction === "next" && track.scrollLeft >= maxScroll - amount * 0.5) {
+      if (
+        direction === "next" &&
+        track.scrollLeft >= maxScroll - amount * 0.5
+      ) {
         track.scrollTo({ left: 0, behavior: "smooth" });
         return;
       }
@@ -763,7 +846,10 @@ function initCarouselControls() {
         return;
       }
 
-      track.scrollBy({ left: direction === "next" ? amount : -amount, behavior: "smooth" });
+      track.scrollBy({
+        left: direction === "next" ? amount : -amount,
+        behavior: "smooth",
+      });
     });
   });
 

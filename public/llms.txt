@@ -1,0 +1,15 @@
+Based on: https://llmsdotxt.com
+
+# Euphoria Theme LLMs.txt
+
+User-agent: *
+Allow: /
+
+Host: https://euphoriatheme.uk
+Title: Euphoria Theme - Pterodactyl Panel Theme
+Description: A customizable theme built for the Pterodactyl panel, powered by the Blueprint Framework.
+
+Contact-Email: contact@euphoriadevelopment.uk
+Contact-Discord: https://discord.gg/Cus2zP4pPH
+
+Sitemap: https://euphoriatheme.uk/sitemap.xml

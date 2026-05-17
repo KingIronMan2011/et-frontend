@@ -1,0 +1,22 @@
+/* TEAM */
+Company: Euphoria Development
+Website: https://euphoriadevelopment.uk/
+Discord: https://discord.gg/Cus2zP4pPH
+GitHub: https://github.com/EuphoriaTheme
+
+/* SITE */
+Component: Euphoria Theme
+Description: A customizable theme built for the Pterodactyl panel, powered by the Blueprint Framework
+Framework: Blueprint Framework
+Host: euphoriatheme.uk
+Built with: HTML, CSS, JavaScript
+
+/* THANKS */
+Blueprint Framework - https://github.com/BlueprintFramework
+Pterodactyl Panel - https://pterodactyl.io/
+Community Contributors and Donators
+
+/* STANDARD */
+Standards: HTML5, CSS3, JavaScript
+Components: Responsive Design, Accessibility, Performance
+Last Updated: 2024
