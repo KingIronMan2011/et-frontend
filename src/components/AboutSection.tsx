@@ -1,6 +1,18 @@
+import { useEffect, useRef } from "react";
+import { createRevealObserver, observeReveal } from "../utils/dom";
+
 export function AboutSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = createRevealObserver();
+    if (sectionRef.current) observeReveal(observer, [sectionRef.current]);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="about">
+    <section ref={sectionRef} id="about" className="about">
       <div className="about-inner grid items-center">
         <div>
           <h2>About Euphoria</h2>

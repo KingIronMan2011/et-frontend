@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import { createRevealObserver, observeReveal } from "../utils/dom";
+
 const features = [
   {
     title: "Theme Customizer",
@@ -18,8 +21,22 @@ const features = [
 ];
 
 export function FeaturesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = createRevealObserver();
+    if (sectionRef.current) {
+      observeReveal(observer, [
+        sectionRef.current,
+        ...sectionRef.current.querySelectorAll(".feature-grid article"),
+      ]);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="features" className="features">
+    <section ref={sectionRef} id="features" className="features">
       <div className="section-title grid">
         <h2>Always evolving.</h2>
         <p>

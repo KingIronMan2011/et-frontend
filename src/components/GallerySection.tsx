@@ -1,3 +1,7 @@
+import { useEffect, useRef } from "react";
+import { createRevealObserver, observeReveal } from "../utils/dom";
+import { initGalleryModal } from "../utils/galleryModal";
+
 const galleryImages = [
   {
     src: "/images/theme-customiser.webp",
@@ -25,7 +29,7 @@ function ImageModal() {
         data-modal-close
       ></div>
       <div
-        className="image-modal-content relative z-[1] grid"
+        className="image-modal-content relative z-1 grid"
         role="dialog"
         aria-modal="true"
         aria-label="Image preview"
@@ -46,9 +50,22 @@ function ImageModal() {
 }
 
 export function GallerySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = createRevealObserver();
+    if (sectionRef.current) observeReveal(observer, [sectionRef.current]);
+    const cleanupModal = initGalleryModal();
+
+    return () => {
+      observer.disconnect();
+      cleanupModal();
+    };
+  }, []);
+
   return (
     <>
-      <section id="gallery" className="gallery">
+      <section ref={sectionRef} id="gallery" className="gallery">
         <div className="section-title grid">
           <h2>See Euphoria in action.</h2>
           <p>

@@ -1,3 +1,8 @@
+import { useEffect, useRef } from "react";
+import { initCarouselControls } from "../utils/carousel";
+import { createRevealObserver, observeReveal } from "../utils/dom";
+import { loadProducts } from "../utils/products";
+
 type ProductCarouselProps = {
   countId: string;
   gridId: string;
@@ -59,8 +64,22 @@ function ProductCarousel({
 }
 
 export function ProductsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = createRevealObserver();
+    if (sectionRef.current) observeReveal(observer, [sectionRef.current]);
+    void loadProducts(observer);
+    const cleanupCarousel = initCarouselControls();
+
+    return () => {
+      observer.disconnect();
+      cleanupCarousel();
+    };
+  }, []);
+
   return (
-    <section id="products" className="products">
+    <section ref={sectionRef} id="products" className="products">
       <div className="section-title grid">
         <h2>Our products</h2>
         <p>

@@ -1,6 +1,20 @@
+import { useEffect, useRef } from "react";
+import { createRevealObserver, observeReveal } from "../utils/dom";
+
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const observer = createRevealObserver();
+    if (sectionRef.current) observeReveal(observer, [sectionRef.current]);
+    if (imageRef.current) observeReveal(observer, [imageRef.current]);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="hero grid items-center">
+    <section ref={sectionRef} className="hero grid items-center">
       <div className="hero-copy">
         <p className="eyebrow">Euphoria Theme</p>
         <h1>Revive your panel.</h1>
@@ -35,6 +49,7 @@ export function HeroSection() {
       </div>
       <div className="hero-media relative">
         <img
+          ref={imageRef}
           src="/images/dashboard.webp"
           alt="Euphoria theme header preview"
           decoding="async"

@@ -2,7 +2,7 @@ export function Header() {
   return (
     <header className="topbar sticky top-0 z-10 flex items-center justify-between border-b">
       <div className="brand flex items-center font-bold">
-        <img src="/images/ptero.webp" alt="Euphoria logo" />
+        <img src="/web-app-manifest-512x512.png" alt="Euphoria logo" />
         <span>Euphoria</span>
       </div>
       <nav className="nav flex font-medium">
