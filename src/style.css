@@ -587,6 +587,13 @@ section {
   border: 0;
 }
 
+.video-frame lite-youtube {
+  @apply absolute inset-0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
 .gallery-grid img {
   transition:
     transform 0.3s ease,

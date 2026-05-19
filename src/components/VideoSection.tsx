@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import "lite-youtube-embed/src/lite-yt-embed.css";
+import "lite-youtube-embed/src/lite-yt-embed.js";
 import { createRevealObserver, observeReveal } from "../utils/dom";
 
 export function VideoSection() {
@@ -18,14 +20,12 @@ export function VideoSection() {
         <p>See the theme in motion with a full overview of the experience.</p>
       </div>
       <div className="video-frame relative overflow-hidden">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/PvEyH9zxlng?rel=0&modestbranding=1&playsinline=1"
+        <lite-youtube
+          videoid="PvEyH9zxlng"
           title="Euphoria theme walkthrough"
-          loading="lazy"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-          allowFullScreen
-        ></iframe>
+          playlabel="Play: Euphoria theme walkthrough"
+          params="rel=0&modestbranding=1"
+        ></lite-youtube>
       </div>
     </section>
   );

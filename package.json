@@ -17,6 +17,7 @@
     "@kingironman2011/vite-pages": "^1.0.2",
     "@tailwindcss/postcss": "^4.3.0",
     "framer-motion": "^12.39.0",
+    "lite-youtube-embed": "^0.3.4",
     "lucide-react": "^1.16.0",
     "postcss": "^8.5.15",
     "react": "^19.2.6",
